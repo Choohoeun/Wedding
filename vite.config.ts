@@ -3,6 +3,7 @@ import { defineConfig } from 'vite';
 
 export default defineConfig({
 	plugins: [sveltekit()],
+	base: '/our-wedding-invitation/',
 	css: {
 		preprocessorOptions: {
 			scss: {
