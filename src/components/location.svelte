@@ -1,8 +1,12 @@
 <script>
 	import { MapPin } from '@lucide/svelte';
+	import { onMount } from 'svelte';
 	import naverMapIcon from '../lib/assets/navermapsvg.svg';
 	import kakaoMapIcon from '../lib/assets/kakaomap_basic.png';
 	import tmapIcon from '../lib/assets/tmap.jpeg';
+
+	let mapLoaded = false;
+	let mapContainer;
 
 	function openNaverMap() {
 		window.open('https://map.naver.com/p/search/청주%20메리다%20컨벤션', '_blank');
@@ -15,6 +19,29 @@
 	function openTmap() {
 		window.open('https://tmap.co.kr/mobile/mobile.html?lat=36.6375&lng=127.4297&name=청주메리다컨벤션', '_blank');
 	}
+
+	onMount(() => {
+		// Intersection Observer를 사용하여 지도가 화면에 보일 때만 로드
+		const observer = new IntersectionObserver((entries) => {
+			entries.forEach(entry => {
+				if (entry.isIntersecting && !mapLoaded) {
+					mapLoaded = true;
+				}
+			});
+		}, {
+			threshold: 0.1 // 10% 보일 때 로드
+		});
+
+		if (mapContainer) {
+			observer.observe(mapContainer);
+		}
+
+		return () => {
+			if (mapContainer) {
+				observer.unobserve(mapContainer);
+			}
+		};
+	});
 </script>
 
 <section class="location">
@@ -27,19 +54,28 @@
 		</div>
 	</div>
 
-	<div class="map-section">
+	<div class="map-section" bind:this={mapContainer}>
 		<div class="map-container">
-			<iframe 
-				src="https://map.kakao.com/link/map/청주메리다컨벤션,36.6375,127.4297?level=3"
-				width="100%" 
-				height="100%" 
-				frameborder="0" 
-				scrolling="no" 
-				marginheight="0" 
-				marginwidth="0"
-				title="청주 메리다 컨벤션 달리아홀"
-				style="border: none; border-radius: 8px;"
-			></iframe>
+			{#if mapLoaded}
+				<iframe 
+					src="https://map.kakao.com/link/map/청주메리다컨벤션,36.6375,127.4297?level=3"
+					width="100%" 
+					height="100%" 
+					frameborder="0" 
+					scrolling="no" 
+					marginheight="0" 
+					marginwidth="0"
+					title="청주 메리다 컨벤션 달리아홀"
+					style="border: none; border-radius: 8px;"
+				></iframe>
+			{:else}
+				<div class="map-placeholder">
+					<div class="placeholder-content">
+						<MapPin size={48} />
+						<span>지도를 로드하는 중...</span>
+					</div>
+				</div>
+			{/if}
 		</div>
 		
 		<div class="map-app-selection">
@@ -171,6 +207,28 @@
 			overflow: hidden;
 			margin-bottom: 0;
 			position: relative;
+		}
+
+		.map-placeholder {
+			width: 100%;
+			height: 100%;
+			background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			border-radius: 8px;
+		}
+
+		.placeholder-content {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			gap: 0.5em;
+			color: #6c757d;
+		}
+
+		.placeholder-content svg {
+			color: #adb5bd;
 		}
 
 		.naver-map-style {
