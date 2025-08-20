@@ -103,8 +103,8 @@
 
 <style lang="scss">
 	.account-info {
-		padding: 0 20em;
-		margin-top: 2em;
+		padding: 0 1.5em;
+		margin-top: 1em;
 	}
 
 	.section-title {

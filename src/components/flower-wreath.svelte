@@ -74,12 +74,12 @@
 
 <style lang="scss">
 	.flower-wreath {
-		padding: 1em 20em;
-        margin-top : 2em;
+		padding: 1em 1.5em;
+        margin-top : 1em;
 	}
 
 	.wreath-card {
-		background-color: white;
+		background-color: #BFA8A8;
 		border-radius: 12px;
 		padding: 1.5em;
 		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
