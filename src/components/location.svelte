@@ -57,17 +57,20 @@
 	<div class="map-section" bind:this={mapContainer}>
 		<div class="map-container">
 			{#if mapLoaded}
-				<iframe 
-					src="https://map.kakao.com/link/map/청주메리다컨벤션,36.6375,127.4297?level=3"
-					width="100%" 
-					height="100%" 
-					frameborder="0" 
-					scrolling="no" 
-					marginheight="0" 
-					marginwidth="0"
-					title="청주 메리다 컨벤션 달리아홀"
-					style="border: none; border-radius: 8px;"
-				></iframe>
+				<div class="static-map">
+					<div class="map-background">
+						<div class="venue-marker">
+							<div class="marker-pin"></div>
+							<div class="marker-label">청주 메리다 컨벤션</div>
+						</div>
+						<div class="map-overlay">
+							<div class="map-info">
+								<div class="venue-name">청주 메리다 컨벤션 달리아홀</div>
+								<div class="venue-address">충청북도 청주시 흥덕구 가경동 1234-5</div>
+							</div>
+						</div>
+					</div>
+				</div>
 			{:else}
 				<div class="map-placeholder">
 					<div class="placeholder-content">
@@ -229,6 +232,89 @@
 
 		.placeholder-content svg {
 			color: #adb5bd;
+		}
+
+		.static-map {
+			width: 100%;
+			height: 100%;
+			position: relative;
+			border-radius: 8px;
+			overflow: hidden;
+		}
+
+		.static-map .map-background {
+			width: 100%;
+			height: 100%;
+			background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+			position: relative;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+
+		.static-map .venue-marker {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			z-index: 10;
+		}
+
+		.static-map .venue-marker .marker-pin {
+			width: 32px;
+			height: 32px;
+			background: #ff4757;
+			border-radius: 50% 50% 50% 0;
+			transform: rotate(-45deg);
+			box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
+			position: relative;
+		}
+
+		.static-map .venue-marker .marker-pin::after {
+			content: "";
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%) rotate(45deg);
+			width: 12px;
+			height: 12px;
+			background: white;
+			border-radius: 50%;
+		}
+
+		.static-map .venue-marker .marker-label {
+			position: absolute;
+			top: 40px;
+			left: 50%;
+			transform: translateX(-50%);
+			background: rgba(0, 0, 0, 0.8);
+			color: white;
+			padding: 4px 8px;
+			border-radius: 4px;
+			font-size: 0.8rem;
+			white-space: nowrap;
+			box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+		}
+
+		.static-map .map-overlay {
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+			padding: 20px;
+			color: white;
+		}
+
+		.static-map .map-info .venue-name {
+			font-weight: 600;
+			font-size: 1rem;
+			margin-bottom: 4px;
+		}
+
+		.static-map .map-info .venue-address {
+			font-size: 0.85rem;
+			opacity: 0.9;
 		}
 
 		.naver-map-style {
