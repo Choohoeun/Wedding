@@ -28,7 +28,7 @@
 			<div class="contact-info">
 				<span class="parents">김철수 · 이영희</span>
 				<span class="relationship">의 아들</span>
-				<span class="name">김민수</span>
+				<span class="name">최믿음</span>
 			</div>
 			<div class="contact-actions">
 				<div class="three-dots">
@@ -49,7 +49,7 @@
 			<div class="contact-info">
 				<span class="parents">박영수 · 최미영</span>
 				<span class="relationship">의 딸</span>
-				<span class="name">박지영</span>
+				<span class="name">신동은</span>
 			</div>
 			<div class="contact-actions">
 				<div class="three-dots">
@@ -243,7 +243,7 @@
 		width: 100%;
 		padding: 1em;
 		margin-top: 2em;
-		background-color: $primary-color;
+		background-color: #8B7373;
 		color: $white;
 		border: none;
 		border-radius: 4px;
@@ -253,11 +253,11 @@
 		transition: background-color 0.2s;
 
 		&:hover {
-			background-color: $primary-color-dark;
+			background-color: #7A6666;
 		}
 
 		&:active {
-			background-color: $primary-color-dark;
+			background-color: #7A6666;
 		}
 	}
 

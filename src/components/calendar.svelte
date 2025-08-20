@@ -37,7 +37,7 @@
 	<div class="wedding-header">
 		<div class="wedding-day-badge">WEDDING DAY</div>
 		<div class="wedding-date">12 / 13</div>
-		<div class="wedding-time">토요일 오후 4시</div>
+		<div class="wedding-time">토요일 오후 16시</div>
 	</div>
 	
 	<div class="divider"></div>
@@ -127,7 +127,7 @@
 		</div>
 		
 		<div class="wedding-message">
-			000 ❤️ 동은의 결혼식이 <span class="highlight-number">{daysUntilWedding + 1}</span>일 남았습니다.
+			믿음 ❤️ 동은의 결혼식이 <span class="highlight-number">{daysUntilWedding + 1}</span>일 남았습니다.
 		</div>
 	</div>
 </section>

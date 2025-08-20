@@ -1,165 +1,227 @@
-<script lang="ts">
-	import photo2 from '$lib/assets/gallery/2.webp';
-	import photo3 from '$lib/assets/gallery/3.webp';
-	import photo4 from '$lib/assets/gallery/4.webp';
-	import photo5 from '$lib/assets/gallery/5.webp';
-	import photo6 from '$lib/assets/gallery/6.webp';
-	import photo7 from '$lib/assets/gallery/7.webp';
-	import photo8 from '$lib/assets/gallery/8.webp';
-	import photo9 from '$lib/assets/gallery/9.webp';
-	import photo10 from '$lib/assets/gallery/10.webp';
-	import photo11 from '$lib/assets/gallery/11.webp';
+<script>
+	import { ChevronDown } from '@lucide/svelte';
 
-	import PhotoSwipeLightBox from 'photoswipe/lightbox';
-	import PhotoSwipe from 'photoswipe';
-	import 'photoswipe/style.css';
-	import { onMount } from 'svelte';
-	import { localeStore } from '../i18n.svelte';
-	import { _ } from 'svelte-i18n';
+	let showMore = false;
+	let currentImageIndex = 0;
 
-	onMount(() => {
-		const lightbox = new PhotoSwipeLightBox({
-			gallery: '#gallery',
-			children: 'a',
-			showHideAnimationType: 'fade',
-			pswpModule: PhotoSwipe
-		});
-
-		lightbox.init();
-	});
-
-	const photos = [
+	// 임의의 갤러리 이미지 데이터 (실제로는 실제 사진으로 교체)
+	const galleryImages = [
 		{
-			src: photo10,
-			width: 1200,
-			height: 1800
+			id: 1,
+			src: 'https://images.unsplash.com/photo-1519741497674-611481863552?w=400&h=400&fit=crop',
+			alt: '신랑 신부 커플샷 1'
 		},
 		{
-			src: photo2,
-			width: 1200,
-			height: 1800
+			id: 2,
+			src: 'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=400&h=400&fit=crop',
+			alt: '신랑 신부 커플샷 2'
 		},
 		{
-			src: photo3,
-			width: 1200,
-			height: 1800
+			id: 3,
+			src: 'https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=400&h=400&fit=crop',
+			alt: '신랑 신부 커플샷 3'
 		},
 		{
-			src: photo4,
-			width: 2000,
-			height: 1333
+			id: 4,
+			src: 'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=400&h=400&fit=crop',
+			alt: '신랑 신부 커플샷 4'
 		},
 		{
-			src: photo5,
-			width: 1200,
-			height: 1800
+			id: 5,
+			src: 'https://images.unsplash.com/photo-1519741497674-611481863552?w=400&h=400&fit=crop',
+			alt: '신랑 신부 커플샷 5'
 		},
 		{
-			src: photo6,
-			width: 2000,
-			height: 1333
+			id: 6,
+			src: 'https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=400&h=400&fit=crop',
+			alt: '신랑 신부 커플샷 6'
 		},
 		{
-			src: photo7,
-			width: 1200,
-			height: 1800
+			id: 7,
+			src: 'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=400&h=400&fit=crop',
+			alt: '신랑 신부 커플샷 7'
 		},
 		{
-			src: photo8,
-			width: 1200,
-			height: 1800
+			id: 8,
+			src: 'https://images.unsplash.com/photo-1519741497674-611481863552?w=400&h=400&fit=crop',
+			alt: '신랑 신부 커플샷 8'
 		},
 		{
-			src: photo9,
-			width: 1200,
-			height: 1790
+			id: 9,
+			src: 'https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=400&h=400&fit=crop',
+			alt: '신랑 신부 커플샷 9'
+		},
+		// 더보기로 추가될 이미지들
+		{
+			id: 10,
+			src: 'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=400&h=400&fit=crop',
+			alt: '신랑 신부 커플샷 10'
 		},
 		{
-			src: photo11,
-			width: 1200,
-			height: 1790
+			id: 11,
+			src: 'https://images.unsplash.com/photo-1519741497674-611481863552?w=400&h=400&fit=crop',
+			alt: '신랑 신부 커플샷 11'
+		},
+		{
+			id: 12,
+			src: 'https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=400&h=400&fit=crop',
+			alt: '신랑 신부 커플샷 12'
+		},
+		{
+			id: 13,
+			src: 'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=400&h=400&fit=crop',
+			alt: '신랑 신부 커플샷 13'
+		},
+		{
+			id: 14,
+			src: 'https://images.unsplash.com/photo-1519741497674-611481863552?w=400&h=400&fit=crop',
+			alt: '신랑 신부 커플샷 14'
+		},
+		{
+			id: 15,
+			src: 'https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=400&h=400&fit=crop',
+			alt: '신랑 신부 커플샷 15'
 		}
 	];
+
+	function toggleMore() {
+		showMore = !showMore;
+	}
+
+	// 초기에는 9개만 보여주고, 더보기 클릭 시 나머지도 보여줌
+	$: displayedImages = showMore ? galleryImages : galleryImages.slice(0, 9);
 </script>
 
 <section class="gallery">
-	<div class="header">
-		<h2 class="title {localeStore.locale}">{$_('gallery.title')}</h2>
-		<p class="sub-title {localeStore.locale}">{$_('gallery.sub_title')}</p>
+	<div class="gallery-header">
+		<div class="gallery-badge">GALLERY</div>
+		<div class="gallery-title">웨딩 갤러리</div>
 	</div>
-	<div id="gallery">
-		{#each photos as photo}
-			<a
-				href={photo.src}
-				class="slide"
-				data-pswp-width={photo.width}
-				data-pswp-height={photo.height}
-				target="_blank"
-			>
-				<img class="thumbnail" src={photo.src} alt="" />
-			</a>
+
+	<div class="gallery-grid">
+		{#each displayedImages as image}
+			<div class="gallery-item">
+				<img 
+					src={image.src} 
+					alt={image.alt}
+					loading="lazy"
+					on:click={() => {
+						// 클릭 시 이미지 확대 기능 (선택사항)
+						console.log('Image clicked:', image.alt);
+					}}
+				/>
+			</div>
 		{/each}
 	</div>
+
+	{#if !showMore}
+		<button class="view-more-btn" on:click={toggleMore}>
+			더 보기
+		</button>
+	{:else}
+		<button class="view-more-btn" on:click={toggleMore}>
+			접기
+		</button>
+	{/if}
 </section>
 
 <style lang="scss">
-	section.gallery {
-		padding: 4.5em 2em 2em 2em;
-		background-color: $white;
+	.gallery {
+		padding: 2em 1.5em;
 	}
 
-	.header {
+	.gallery-header {
+		text-align: center;
 		margin-bottom: 2em;
 	}
 
-	h2.title {
-		text-align: center;
-		&.en {
-			@extend .title-font-en;
-			letter-spacing: 1px;
-		}
-
-		&.kr {
-			@extend .title-font-kr;
-			letter-spacing: 1px;
-		}
+	.gallery-badge {
+		display: inline-block;
+		background-color: transparent;
+		padding: 0.5em 1.5em;
+		font-size: 0.8rem;
+		font-weight: 600;
+		color: #8B7355;
+		text-transform: uppercase;
+		letter-spacing: 1px;
+		margin-bottom: 1em;
+		font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 	}
 
-	p.sub-title {
-		text-align: center;
-		&.kr {
-			margin-top: 0.9em;
-			font-size: 0.9rem;
-		}
-
-		&.en {
-			margin-top: 0.5em;
-			font-size: 1.2rem;
-		}
+	.gallery-title {
+		font-size: 1.3rem;
+		font-weight: 500;
+		color: #D4A5A5;
+		font-family: 'Noto Serif KR', serif;
 	}
 
-	#gallery {
+	.gallery-grid {
 		display: grid;
-		gap: 1em;
-		grid-template-columns: repeat(2, 1fr);
-		grid-auto-rows: 6.5em;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 0.5em;
+		margin-bottom: 2em;
 	}
 
-	img.thumbnail {
-		border-radius: 4px;
+	.gallery-item {
+		aspect-ratio: 1;
+		overflow: hidden;
+		border-radius: 8px;
+		cursor: pointer;
+		transition: transform 0.2s;
+
+		&:hover {
+			transform: scale(1.02);
+		}
+
+		img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			transition: transform 0.3s;
+
+			&:hover {
+				transform: scale(1.05);
+			}
+		}
+	}
+
+	.view-more-btn {
+		display: block;
 		width: 100%;
-		height: 100%;
-		object-fit: cover;
+		max-width: 200px;
+		margin: 0 auto;
+		padding: 0.8em 1.5em;
+		background-color: #BFA8A8;
+		color: white;
+		border: none;
+		border-radius: 8px;
+		font-size: 0.9rem;
+		font-weight: 500;
+		cursor: pointer;
+		transition: background-color 0.2s;
+		font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+		&:hover {
+			background-color: #A89A9A;
+		}
+
+		&:active {
+			background-color: #A89A9A;
+		}
 	}
 
-	.slide:nth-child(1),
-	.slide:nth-child(2),
-	.slide:nth-child(3),
-	.slide:nth-child(5),
-	.slide:nth-child(7),
-	.slide:nth-child(8),
-	.slide:nth-child(9),
-	.slide:nth-child(10) {
-		grid-row: span 2;
+	/* 반응형 디자인 */
+	@media (max-width: 768px) {
+		.gallery {
+			padding: 1.5em 1em;
+		}
+
+		.gallery-grid {
+			gap: 0.3em;
+		}
+
+		.gallery-title {
+			font-size: 1.3rem;
+		}
 	}
 </style>
