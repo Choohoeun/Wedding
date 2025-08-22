@@ -162,7 +162,7 @@
 	.contact-info {
 		display: flex;
 		align-items: center;
-		gap: 0.1em;
+		gap: 0.3em;
 		font-size: 1rem;
 		color: #333;
 		text-align: center;
@@ -170,20 +170,20 @@
 
 		.parents {
 			font-weight: 500;
-			min-width: 140px;
+			min-width: 120px;
 			text-align: center;
 		}
 
 		.relationship {
 			color: $primary-color;
 			font-size: 0.9rem;
-			min-width: 80px;
+			min-width: 60px;
 			text-align: center;
 		}
 
 		.name {
 			font-weight: 600;
-			min-width: 100px;
+			min-width: 80px;
 			text-align: center;
 		}
 	}

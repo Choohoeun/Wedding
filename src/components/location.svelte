@@ -621,30 +621,31 @@
 		overflow: hidden;
 		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 		margin-top: 0;
-		padding: 16px 20px;
-		justify-content: center;
-		gap: 30px;
+		padding: 16px 12px;
+		justify-content: space-between;
+		gap: 8px;
 	}
 
 	.app-option {
 		display: flex;
 		align-items: center;
-		gap: 8px;
+		gap: 6px;
 		background: none;
 		border: none;
-		padding: 8px 12px;
+		padding: 8px 8px;
 		cursor: pointer;
 		transition: all 0.2s;
 		border-radius: 8px;
 		min-width: auto;
+		flex: 1;
 
 		&:hover {
 			background-color: #f0f0f0;
 		}
 
 		.app-icon {
-			width: 28px;
-			height: 28px;
+			width: 24px;
+			height: 24px;
 			border-radius: 6px;
 			display: flex;
 			align-items: center;
@@ -674,7 +675,7 @@
 		}
 
 		span {
-			font-size: 13px;
+			font-size: 12px;
 			color: #333;
 			font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 			font-weight: 500;
