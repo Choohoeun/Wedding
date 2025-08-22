@@ -6,18 +6,18 @@
 		const shareUrl = window.location.href;
 		const shareTitle = '최믿음 & 신동은의 결혼식에 초대합니다';
 		const shareDescription = '저희 결혼식에 함께해 주세요!';
-		
-		// 카카오톡 앱으로 직접 공유
+
+		// 카카오톡 앱으로 직접 공유 (친구 선택 화면으로 이동)
 		const kakaoShareUrl = `kakaotalk://send?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(shareTitle + '\n' + shareDescription)}`;
-		
+
 		// 카카오톡 앱 실행 시도
 		window.location.href = kakaoShareUrl;
-		
-		// 카카오톡 앱이 없는 경우를 위한 폴백 (2초 후)
+
+		// 카카오톡 앱이 없는 경우를 위한 폴백 (3초 후)
 		setTimeout(() => {
 			// 카카오톡 앱이 열리지 않았다면 카카오톡 다운로드 페이지로 이동
 			window.open('https://www.kakaocorp.com/service/KakaoTalk', '_blank');
-		}, 2000);
+		}, 3000);
 	}
 
 	function copyInvitationLink() {
