@@ -4,7 +4,55 @@
 	import naverMapIcon from '../lib/assets/navermapsvg.svg';
 	import kakaoMapIcon from '../lib/assets/kakaomap_basic.png';
 
-	// 지도 관련 변수 제거 (직접 표시)
+	// Naver Maps JS API loader
+	let mapEl;
+	let mapInitialized = false;
+	let mapError = false;
+	const NAVER_CLIENT_ID = import.meta.env.VITE_NAVER_MAP_CLIENT_ID;
+	function loadNaverMap() {
+		return new Promise((resolve, reject) => {
+			if (typeof window !== 'undefined' && window.naver && window.naver.maps) {
+				resolve();
+				return;
+			}
+			if (!NAVER_CLIENT_ID) {
+				reject(new Error('Missing Naver client id'));
+				return;
+			}
+			const existing = document.getElementById('naver-map-script');
+			if (existing) {
+				existing.addEventListener('load', () => resolve());
+				return;
+			}
+			const script = document.createElement('script');
+			script.id = 'naver-map-script';
+			script.src = `https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=${NAVER_CLIENT_ID}`;
+			script.async = true;
+			script.defer = true;
+			script.onload = () => resolve();
+			script.onerror = () => reject(new Error('Failed to load Naver Maps'));
+			document.head.appendChild(script);
+		});
+	}
+
+	onMount(async () => {
+		try {
+			await loadNaverMap();
+			const { naver } = window;
+			const center = new naver.maps.LatLng(36.6375, 127.4297);
+			const map = new naver.maps.Map(mapEl, {
+				center,
+				zoom: 16,
+				zoomControl: true,
+				mapDataControl: false
+			});
+			new naver.maps.Marker({ position: center, map, title: '청주 메리다 컨벤션' });
+			mapInitialized = true;
+		} catch (e) {
+			console.error(e);
+			mapError = true;
+		}
+	});
 
 	function openNaverMap() {
 		window.open('https://map.naver.com/p/search/청주%20메리다%20컨벤션', '_blank');
@@ -27,16 +75,7 @@
 
 	<div class="map-section">
 		<div class="map-container">
-			<iframe 
-				src="https://map.naver.com/v5/embed/place/1274297,36.6375,15,0,0,0,base,dh?c=15,0,0,0,dh"
-				width="100%" 
-				height="350" 
-				style="border:0;" 
-				allowfullscreen="" 
-				loading="lazy" 
-				referrerpolicy="no-referrer-when-downgrade"
-				title="청주 메리다 컨벤션 위치">
-			</iframe>
+			<div class="naver-map" bind:this={mapEl}></div>
 		</div>
 		
 		<div class="map-app-selection">
@@ -161,6 +200,11 @@
 			overflow: hidden;
 			margin-bottom: 0;
 			position: relative;
+		}
+
+		.naver-map {
+			width: 100%;
+			height: 100%;
 		}
 
 		.map-placeholder {
