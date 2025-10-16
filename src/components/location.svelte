@@ -3,7 +3,6 @@
 	import { onMount } from 'svelte';
 	import naverMapIcon from '../lib/assets/navermapsvg.svg';
 	import kakaoMapIcon from '../lib/assets/kakaomap_basic.png';
-	import tmapIcon from '../lib/assets/tmap.jpeg';
 
 	// 지도 관련 변수 제거 (직접 표시)
 
@@ -13,10 +12,6 @@
 
 	function openKakaoMap() {
 		window.open('https://map.kakao.com/link/map/청주메리다컨벤션,36.6375,127.4297', '_blank');
-	}
-
-	function openTmap() {
-		window.open('tmap://search?name=청주메리다컨벤션', '_blank');
 	}
 </script>
 
@@ -61,13 +56,6 @@
 					<img src={kakaoMapIcon} alt="카카오 내비" />
 				</div>
 				<span>카카오 내비</span>
-			</button>
-			<div class="app-divider"></div>
-			<button class="app-option" on:click={openTmap}>
-				<div class="app-icon tmap-icon">
-					<img src={tmapIcon} alt="티맵" />
-				</div>
-				<span>티맵</span>
 			</button>
 		</div>
 	</div>
@@ -207,6 +195,8 @@
 			position: relative;
 			border-radius: 8px;
 			overflow: hidden;
+			display: block;
+			visibility: visible;
 		}
 
 		.static-map .map-background {
@@ -217,6 +207,7 @@
 			display: flex;
 			align-items: center;
 			justify-content: center;
+			min-height: 350px;
 		}
 
 		.static-map .venue-marker {
