@@ -5,7 +5,7 @@
 	import kakaoMapIcon from '../lib/assets/kakaomap_basic.png';
 	import tmapIcon from '../lib/assets/tmap.jpeg';
 
-	let mapLoaded = false;
+	let mapLoaded = true; // 즉시 로드되도록 변경
 	let mapContainer;
 
 	function openNaverMap() {
@@ -19,29 +19,6 @@
 	function openTmap() {
 		window.open('https://tmap.co.kr/mobile/mobile.html?lat=36.6375&lng=127.4297&name=청주메리다컨벤션', '_blank');
 	}
-
-	onMount(() => {
-		// Intersection Observer를 사용하여 지도가 화면에 보일 때만 로드
-		const observer = new IntersectionObserver((entries) => {
-			entries.forEach(entry => {
-				if (entry.isIntersecting && !mapLoaded) {
-					mapLoaded = true;
-				}
-			});
-		}, {
-			threshold: 0.1 // 10% 보일 때 로드
-		});
-
-		if (mapContainer) {
-			observer.observe(mapContainer);
-		}
-
-		return () => {
-			if (mapContainer) {
-				observer.unobserve(mapContainer);
-			}
-		};
-	});
 </script>
 
 <section class="location">
