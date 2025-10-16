@@ -27,15 +27,51 @@
 
 	<div class="map-section">
 		<div class="map-container">
-			<iframe 
-				src="https://map.naver.com/v5/"
-				width="100%" 
-				height="350" 
-				style="border:0;" 
-				allowfullscreen="" 
-				loading="lazy" 
-				referrerpolicy="no-referrer-when-downgrade">
-			</iframe>
+			<div class="static-map">
+				<div class="map-background">
+					<!-- 도로 시뮬레이션 -->
+					<div class="road road-horizontal-main"></div>
+					<div class="road road-vertical-main"></div>
+					<div class="road road-horizontal-top"></div>
+					<div class="road road-vertical-left"></div>
+					<div class="road road-vertical-right"></div>
+					<div class="road road-horizontal-bottom"></div>
+
+					<!-- 건물 시뮬레이션 -->
+					<div class="building building-top-left"></div>
+					<div class="building building-top-right"></div>
+					<div class="building building-bottom-left"></div>
+					<div class="building building-bottom-right"></div>
+					<div class="building building-center-left"></div>
+					<div class="building building-center-right"></div>
+
+					<!-- 노란색 영역 -->
+					<div class="yellow-area"></div>
+
+					<!-- 장소 마커 -->
+					<div class="venue-marker">
+						<div class="marker-pin"></div>
+						<div class="marker-label">청주 메리다 컨벤션</div>
+					</div>
+
+					<!-- 할리스와 전소 라벨 -->
+					<div class="poi hollys">
+						<span>☕</span>
+						<span>할리스</span>
+					</div>
+					<div class="poi jeonso">
+						<span>전소</span>
+					</div>
+
+					<!-- 지도 정보 오버레이 -->
+					<div class="map-overlay">
+						<div class="map-info">
+							<div class="venue-name">청주 메리다 컨벤션 달리아홀</div>
+							<div class="venue-address">충청북도 청주시 흥덕구 가경동 1234-5</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 		
 		<div class="map-app-selection">
@@ -192,6 +228,218 @@
 			overflow: hidden;
 			display: block;
 			visibility: visible;
+		}
+
+		.static-map .map-background {
+			width: 100%;
+			height: 100%;
+			background: #f8f9fa;
+			position: relative;
+			display: block;
+		}
+
+		/* 도로 스타일 */
+		.road {
+			position: absolute;
+			background-color: #ffffff;
+			border: 1px solid #e0e0e0;
+			z-index: 1;
+		}
+
+		.road-horizontal-main {
+			width: 100%;
+			height: 20px;
+			top: 50%;
+			transform: translateY(-50%);
+		}
+
+		.road-vertical-main {
+			width: 20px;
+			height: 100%;
+			left: 50%;
+			transform: translateX(-50%);
+		}
+
+		.road-horizontal-top {
+			width: 70%;
+			height: 15px;
+			top: 25%;
+			left: 15%;
+		}
+
+		.road-vertical-left {
+			width: 15px;
+			height: 70%;
+			left: 25%;
+			top: 15%;
+		}
+
+		.road-vertical-right {
+			width: 15px;
+			height: 70%;
+			right: 25%;
+			top: 15%;
+		}
+
+		.road-horizontal-bottom {
+			width: 70%;
+			height: 15px;
+			bottom: 25%;
+			left: 15%;
+		}
+
+		/* 건물 스타일 */
+		.building {
+			position: absolute;
+			background-color: #e8e8e8;
+			border: 1px solid #d0d0d0;
+			z-index: 0;
+		}
+
+		.building-top-left {
+			width: 20%;
+			height: 20%;
+			top: 5%;
+			left: 5%;
+		}
+
+		.building-top-right {
+			width: 25%;
+			height: 20%;
+			top: 10%;
+			right: 10%;
+		}
+
+		.building-bottom-left {
+			width: 22%;
+			height: 18%;
+			bottom: 8%;
+			left: 8%;
+		}
+
+		.building-bottom-right {
+			width: 28%;
+			height: 22%;
+			bottom: 5%;
+			right: 5%;
+		}
+
+		.building-center-left {
+			width: 15%;
+			height: 10%;
+			top: 40%;
+			left: 10%;
+		}
+
+		.building-center-right {
+			width: 18%;
+			height: 12%;
+			top: 30%;
+			right: 15%;
+		}
+
+		/* 노란색 영역 */
+		.yellow-area {
+			position: absolute;
+			width: 30%;
+			height: 30%;
+			top: 0;
+			left: 0;
+			background-color: #fffacd;
+			z-index: 0;
+			border-radius: 0 0 50px 0;
+		}
+
+		/* 장소 마커 */
+		.venue-marker {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			z-index: 10;
+		}
+
+		.venue-marker .marker-pin {
+			width: 32px;
+			height: 32px;
+			background: #ff4757;
+			border-radius: 50% 50% 50% 0;
+			transform: rotate(-45deg);
+			box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
+			position: relative;
+		}
+
+		.venue-marker .marker-pin::after {
+			content: "";
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%) rotate(45deg);
+			width: 12px;
+			height: 12px;
+			background: white;
+			border-radius: 50%;
+		}
+
+		.venue-marker .marker-label {
+			position: absolute;
+			top: 40px;
+			left: 50%;
+			transform: translateX(-50%);
+			background: rgba(0, 0, 0, 0.8);
+			color: white;
+			padding: 4px 8px;
+			border-radius: 4px;
+			font-size: 0.8rem;
+			white-space: nowrap;
+			box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+		}
+
+		/* POI 라벨 */
+		.poi {
+			position: absolute;
+			display: flex;
+			align-items: center;
+			background: rgba(255, 255, 255, 0.9);
+			padding: 4px 8px;
+			border-radius: 4px;
+			box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+			font-size: 0.75rem;
+			color: #333;
+			white-space: nowrap;
+			z-index: 5;
+		}
+
+		.hollys {
+			top: 15%;
+			right: 10%;
+		}
+
+		.jeonso {
+			top: 40%;
+			left: 5%;
+		}
+
+		/* 지도 오버레이 */
+		.map-overlay {
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+			padding: 20px;
+			color: white;
+		}
+
+		.map-info .venue-name {
+			font-weight: 600;
+			font-size: 1rem;
+			margin-bottom: 4px;
+		}
+
+		.map-info .venue-address {
+			font-size: 0.85rem;
+			opacity: 0.9;
 		}
 
 		.static-map .map-background {
