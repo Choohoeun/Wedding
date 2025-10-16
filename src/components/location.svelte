@@ -28,7 +28,7 @@
 	<div class="map-section">
 		<div class="map-container">
 			<iframe 
-				src="https://map.naver.com/v5/embed/search?query=청주메리다컨벤션"
+				src="https://map.naver.com/v5/"
 				width="100%" 
 				height="350" 
 				style="border:0;" 
