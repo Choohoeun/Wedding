@@ -142,12 +142,14 @@
 
 <style lang="scss">
 	section.rsvp {
-		padding: 4.5em 3.5em;
+		padding: 4.5em 1.5em;
 	}
 
 	.contact-container {
 		max-width: 500px;
 		margin: 0 auto;
+		width: 100%;
+		box-sizing: border-box;
 	}
 
 	.contact-row {
@@ -157,42 +159,50 @@
 		margin-bottom: 1.5em;
 		padding: 1em 0;
 		border-bottom: 1px solid #eee;
+		width: 100%;
+		box-sizing: border-box;
 	}
 
 	.contact-info {
 		display: flex;
 		align-items: center;
-		gap: 0.5em;
-		font-size: 1rem;
+		gap: 0.3em;
+		font-size: 0.9rem;
 		color: #333;
 		text-align: center;
 		flex: 1;
+		min-width: 0;
+		overflow: hidden;
 
 		.parents {
 			font-weight: 500;
-			min-width: 110px;
+			min-width: 90px;
 			text-align: center;
+			flex-shrink: 0;
 		}
 
 		.relationship {
 			color: $primary-color;
-			font-size: 0.9rem;
-			min-width: 50px;
+			font-size: 0.8rem;
+			min-width: 40px;
 			text-align: center;
+			flex-shrink: 0;
 		}
 
 		.name {
 			font-weight: 600;
-			min-width: 70px;
+			min-width: 60px;
 			text-align: center;
+			flex-shrink: 0;
 		}
 	}
 
 	.contact-actions {
 		display: flex;
 		align-items: center;
-		gap: 0.5em;
-		margin-right:1.6em;
+		gap: 0.3em;
+		margin-left: 0.5em;
+		flex-shrink: 0;
 
 		.dots {
 			color: #999;

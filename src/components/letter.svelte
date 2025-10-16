@@ -29,8 +29,8 @@
 		<div class="divider"></div>
 
 		<div class="family-description kr">
-			<p>백현철 · 김동자 <span class="relationship">의 아들</span><span class="name-gap"></span>백현우</p>
-			<p>홍수철 · 박순자 <span class="relationship">의 딸</span><span class="name-gap"></span>홍해인</p>
+			<p>백현철 · 김동자 <span class="relationship">의 아들</span><span class="name-gap"></span>최믿음</p>
+			<p>홍수철 · 박순자 <span class="relationship">의 딸</span><span class="name-gap"></span>신동은</p>
 		</div>
 	</div>
 </section>
