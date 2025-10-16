@@ -27,20 +27,15 @@
 
 	<div class="map-section">
 		<div class="map-container">
-			<div class="static-map">
-				<div class="map-background">
-					<div class="venue-marker">
-						<div class="marker-pin"></div>
-						<div class="marker-label">청주 메리다 컨벤션</div>
-					</div>
-					<div class="map-overlay">
-						<div class="map-info">
-							<div class="venue-name">청주 메리다 컨벤션 달리아홀</div>
-							<div class="venue-address">충청북도 청주시 흥덕구 가경동 1234-5</div>
-						</div>
-					</div>
-				</div>
-			</div>
+			<iframe 
+				src="https://map.naver.com/v5/embed/search?query=청주메리다컨벤션"
+				width="100%" 
+				height="350" 
+				style="border:0;" 
+				allowfullscreen="" 
+				loading="lazy" 
+				referrerpolicy="no-referrer-when-downgrade">
+			</iframe>
 		</div>
 		
 		<div class="map-app-selection">
