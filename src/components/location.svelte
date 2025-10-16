@@ -27,51 +27,16 @@
 
 	<div class="map-section">
 		<div class="map-container">
-			<div class="static-map">
-				<div class="map-background">
-					<!-- 도로 시뮬레이션 -->
-					<div class="road road-horizontal-main"></div>
-					<div class="road road-vertical-main"></div>
-					<div class="road road-horizontal-top"></div>
-					<div class="road road-vertical-left"></div>
-					<div class="road road-vertical-right"></div>
-					<div class="road road-horizontal-bottom"></div>
-
-					<!-- 건물 시뮬레이션 -->
-					<div class="building building-top-left"></div>
-					<div class="building building-top-right"></div>
-					<div class="building building-bottom-left"></div>
-					<div class="building building-bottom-right"></div>
-					<div class="building building-center-left"></div>
-					<div class="building building-center-right"></div>
-
-					<!-- 노란색 영역 -->
-					<div class="yellow-area"></div>
-
-					<!-- 장소 마커 -->
-					<div class="venue-marker">
-						<div class="marker-pin"></div>
-						<div class="marker-label">청주 메리다 컨벤션</div>
-					</div>
-
-					<!-- 할리스와 전소 라벨 -->
-					<div class="poi hollys">
-						<span>☕</span>
-						<span>할리스</span>
-					</div>
-					<div class="poi jeonso">
-						<span>전소</span>
-					</div>
-
-					<!-- 지도 정보 오버레이 -->
-					<div class="map-overlay">
-						<div class="map-info">
-							<div class="venue-name">청주 메리다 컨벤션 달리아홀</div>
-							<div class="venue-address">충청북도 청주시 흥덕구 가경동 1234-5</div>
-						</div>
-					</div>
-				</div>
-			</div>
+			<iframe 
+				src="https://map.naver.com/v5/embed/place/1274297,36.6375,15,0,0,0,base,dh?c=15,0,0,0,dh"
+				width="100%" 
+				height="350" 
+				style="border:0;" 
+				allowfullscreen="" 
+				loading="lazy" 
+				referrerpolicy="no-referrer-when-downgrade"
+				title="청주 메리다 컨벤션 위치">
+			</iframe>
 		</div>
 		
 		<div class="map-app-selection">
