@@ -5,8 +5,7 @@
 	import kakaoMapIcon from '../lib/assets/kakaomap_basic.png';
 	import tmapIcon from '../lib/assets/tmap.jpeg';
 
-	let mapLoaded = true; // 즉시 로드되도록 변경
-	let mapContainer;
+	// 지도 관련 변수 제거 (직접 표시)
 
 	function openNaverMap() {
 		window.open('https://map.naver.com/p/search/청주%20메리다%20컨벤션', '_blank');
@@ -17,7 +16,7 @@
 	}
 
 	function openTmap() {
-		window.open('https://tmap.co.kr/mobile/mobile.html?lat=36.6375&lng=127.4297&name=청주메리다컨벤션', '_blank');
+		window.open('tmap://search?name=청주메리다컨벤션', '_blank');
 	}
 </script>
 
@@ -31,31 +30,22 @@
 		</div>
 	</div>
 
-	<div class="map-section" bind:this={mapContainer}>
+	<div class="map-section">
 		<div class="map-container">
-			{#if mapLoaded}
-				<div class="static-map">
-					<div class="map-background">
-						<div class="venue-marker">
-							<div class="marker-pin"></div>
-							<div class="marker-label">청주 메리다 컨벤션</div>
-						</div>
-						<div class="map-overlay">
-							<div class="map-info">
-								<div class="venue-name">청주 메리다 컨벤션 달리아홀</div>
-								<div class="venue-address">충청북도 청주시 흥덕구 가경동 1234-5</div>
-							</div>
+			<div class="static-map">
+				<div class="map-background">
+					<div class="venue-marker">
+						<div class="marker-pin"></div>
+						<div class="marker-label">청주 메리다 컨벤션</div>
+					</div>
+					<div class="map-overlay">
+						<div class="map-info">
+							<div class="venue-name">청주 메리다 컨벤션 달리아홀</div>
+							<div class="venue-address">충청북도 청주시 흥덕구 가경동 1234-5</div>
 						</div>
 					</div>
 				</div>
-			{:else}
-				<div class="map-placeholder">
-					<div class="placeholder-content">
-						<MapPin size={48} />
-						<span>지도를 로드하는 중...</span>
-					</div>
-				</div>
-			{/if}
+			</div>
 		</div>
 		
 		<div class="map-app-selection">
