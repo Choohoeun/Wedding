@@ -1,16 +1,25 @@
 <script lang="ts">
-	import { _ } from 'svelte-i18n';
-	import { localeStore } from '../i18n.svelte';
 	import { Phone, Mail, X } from '@lucide/svelte';
 
 	let showModal = false;
+	const groomPhone = '010-8373-4502';
+	const bridePhone = '010-2520-0932';
+	// 혼주 연락처
+	const hosts = {
+		groomFather: '010-3958-4502', // 최철순 (swap)
+		groomMother: '010-3684-2767', // 임흥순 (swap)
+		brideFather: '010-5464-7439', // 신포식
+		brideMother: '010-7656-0902'  // 곽주연
+	} as const;
 
-	function openPhone() {
-		window.open('tel:000-0000-0000');
+	function openPhone(num?: string) {
+		const target = (num || groomPhone).replace(/[^0-9+]/g, '');
+		window.open(`tel:${target}`);
 	}
 
-	function openSMS() {
-		window.open('sms:000-0000-0000');
+	function openSMS(num?: string) {
+		const target = (num || groomPhone).replace(/[^0-9+]/g, '');
+		window.open(`sms:${target}`);
 	}
 
 	function toggleModal() {
@@ -26,7 +35,7 @@
 	<div class="contact-container">
 		<div class="contact-row">
 			<div class="contact-info">
-				<span class="parents">김철수 · 이영희</span>
+				<span class="parents">최철순 · 임흥순</span>
 				<span class="relationship">의 아들</span>
 				<span class="name">최믿음</span>
 			</div>
@@ -36,10 +45,10 @@
 					<span class="dot"></span>
 					<span class="dot"></span>
 				</div>
-				<button class="contact-btn phone" on:click={openPhone}>
+				<button class="contact-btn phone" on:click={() => openPhone(groomPhone)}>
 					<Phone size="16" />
 				</button>
-				<button class="contact-btn email" on:click={openSMS}>
+				<button class="contact-btn email" on:click={() => openSMS(groomPhone)}>
 					<Mail size="16" />
 				</button>
 			</div>
@@ -47,7 +56,7 @@
 
 		<div class="contact-row">
 			<div class="contact-info">
-				<span class="parents">박영수 · 최미영</span>
+				<span class="parents">신포식 · 곽주연</span>
 				<span class="relationship">의 딸</span>
 				<span class="name">신동은</span>
 			</div>
@@ -57,10 +66,10 @@
 					<span class="dot"></span>
 					<span class="dot"></span>
 				</div>
-				<button class="contact-btn phone" on:click={openPhone}>
+				<button class="contact-btn phone" on:click={() => openPhone(bridePhone)}>
 					<Phone size="16" />
 				</button>
-				<button class="contact-btn email" on:click={openSMS}>
+				<button class="contact-btn email" on:click={() => openSMS(bridePhone)}>
 					<Mail size="16" />
 				</button>
 			</div>
@@ -87,23 +96,23 @@
 				<div class="hosts-section">
 					<h3 class="hosts-title">신랑측 혼주</h3>
 					<div class="host-contact">
-						<span class="host-name">장홍기</span>
+						<span class="host-name">최철순</span>
 						<div class="host-actions">
-							<button class="host-btn phone" on:click={openPhone}>
+							<button class="host-btn phone" on:click={() => openPhone(hosts.groomFather)}>
 								<Phone size="16" />
 							</button>
-							<button class="host-btn email" on:click={openSMS}>
+							<button class="host-btn email" on:click={() => openSMS(hosts.groomFather)}>
 								<Mail size="16" />
 							</button>
 						</div>
 					</div>
 					<div class="host-contact">
-						<span class="host-name">이진미</span>
+						<span class="host-name">임흥순</span>
 						<div class="host-actions">
-							<button class="host-btn phone" on:click={openPhone}>
+							<button class="host-btn phone" on:click={() => openPhone(hosts.groomMother)}>
 								<Phone size="16" />
 							</button>
-							<button class="host-btn email" on:click={openSMS}>
+							<button class="host-btn email" on:click={() => openSMS(hosts.groomMother)}>
 								<Mail size="16" />
 							</button>
 						</div>
@@ -113,23 +122,23 @@
 				<div class="hosts-section">
 					<h3 class="hosts-title">신부측 혼주</h3>
 					<div class="host-contact">
-						<span class="host-name">최광선</span>
+						<span class="host-name">신포식</span>
 						<div class="host-actions">
-							<button class="host-btn phone" on:click={openPhone}>
+							<button class="host-btn phone" on:click={() => openPhone(hosts.brideFather)}>
 								<Phone size="16" />
 							</button>
-							<button class="host-btn email" on:click={openSMS}>
+							<button class="host-btn email" on:click={() => openSMS(hosts.brideFather)}>
 								<Mail size="16" />
 							</button>
 						</div>
 					</div>
 					<div class="host-contact">
-						<span class="host-name">황은숙</span>
+						<span class="host-name">곽주연</span>
 						<div class="host-actions">
-							<button class="host-btn phone" on:click={openPhone}>
+							<button class="host-btn phone" on:click={() => openPhone(hosts.brideMother)}>
 								<Phone size="16" />
 							</button>
-							<button class="host-btn email" on:click={openSMS}>
+							<button class="host-btn email" on:click={() => openSMS(hosts.brideMother)}>
 								<Mail size="16" />
 							</button>
 						</div>
@@ -156,8 +165,8 @@
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-		margin-bottom: 1.5em;
-		padding: 1em 0;
+		margin-bottom: 0.8em;
+		padding: 0.6em 0;
 		border-bottom: 1px solid #eee;
 		width: 100%;
 		box-sizing: border-box;
@@ -252,7 +261,7 @@
 		display: block;
 		width: 100%;
 		padding: 1em;
-		margin-top: 2em;
+		margin-top: 1.2em;
 		background-color: #8B7373;
 		color: $white;
 		border: none;

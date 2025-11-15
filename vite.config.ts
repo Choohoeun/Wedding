@@ -3,6 +3,7 @@ import { defineConfig } from 'vite';
 
 export default defineConfig({
 	plugins: [sveltekit()],
+	assetsInclude: ['**/*.JPG', '**/*.JPEG'],
 	css: {
 		preprocessorOptions: {
 			scss: {

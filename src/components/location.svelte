@@ -1,58 +1,6 @@
 <script>
-	import { MapPin } from '@lucide/svelte';
-	import { onMount } from 'svelte';
 	import naverMapIcon from '../lib/assets/navermapsvg.svg';
 	import kakaoMapIcon from '../lib/assets/kakaomap_basic.png';
-
-	// Naver Maps JS API loader
-	let mapEl;
-	let mapInitialized = false;
-	let mapError = false;
-	const NAVER_CLIENT_ID = import.meta.env.VITE_NAVER_MAP_CLIENT_ID;
-	function loadNaverMap() {
-		return new Promise((resolve, reject) => {
-			if (typeof window !== 'undefined' && window.naver && window.naver.maps) {
-				resolve();
-				return;
-			}
-			if (!NAVER_CLIENT_ID) {
-				reject(new Error('Missing Naver client id'));
-				return;
-			}
-			const existing = document.getElementById('naver-map-script');
-			if (existing) {
-				existing.addEventListener('load', () => resolve());
-				return;
-			}
-			const script = document.createElement('script');
-			script.id = 'naver-map-script';
-			script.src = `https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=${NAVER_CLIENT_ID}`;
-			script.async = true;
-			script.defer = true;
-			script.onload = () => resolve();
-			script.onerror = () => reject(new Error('Failed to load Naver Maps'));
-			document.head.appendChild(script);
-		});
-	}
-
-	onMount(async () => {
-		try {
-			await loadNaverMap();
-			const { naver } = window;
-			const center = new naver.maps.LatLng(36.6375, 127.4297);
-			const map = new naver.maps.Map(mapEl, {
-				center,
-				zoom: 16,
-				zoomControl: true,
-				mapDataControl: false
-			});
-			new naver.maps.Marker({ position: center, map, title: '청주 메리다 컨벤션' });
-			mapInitialized = true;
-		} catch (e) {
-			console.error(e);
-			mapError = true;
-		}
-	});
 
 	function openNaverMap() {
 		window.open('https://map.naver.com/p/search/청주%20메리다%20컨벤션', '_blank');
@@ -68,14 +16,23 @@
 		<div class="location-label">LOCATION</div>
 		<div class="title kr">오시는 길</div>
 		<div class="venue-info">
-			<div class="venue-name kr">청주 메리다 컨벤션 달리아홀</div>
-			<div class="venue-address kr">충청북도 청주시 흥덕구 가경동 1234-5</div>
+			<div class="venue-name kr">청주 메리다 웨딩컨벤션</div>
+			<div class="venue-address kr">충청북도 청주시 청원구 내수읍 구성리 251</div>
 		</div>
 	</div>
 
 	<div class="map-section">
 		<div class="map-container">
-			<div class="naver-map" bind:this={mapEl}></div>
+		<iframe
+				class="google-embed"
+				src="https://www.google.com/maps?q=%EC%B2%AD%EC%A3%BC%EB%A9%94%EB%A6%AC%EB%8B%A4%20%EC%BB%A8%EB%B2%A4%EC%85%98&z=16&hl=ko&output=embed"
+				width="100%"
+				height="100%"
+				style="border:0;"
+				loading="lazy"
+			referrerpolicy="no-referrer-when-downgrade"
+				title="청주 메리다 컨벤션 위치">
+			</iframe>
 		</div>
 		
 		<div class="map-app-selection">
@@ -92,44 +49,33 @@
 				</div>
 				<span>카카오 내비</span>
 			</button>
+			<div class="app-divider"></div>
 		</div>
 	</div>
 
-	<div class="transportation-info">
-		<div class="transport-section">
-			<div class="transport-title">지하철</div>
-			<div class="transport-content">청주역 1번 출구에서 도보 10분 또는 택시 이용</div>
-		</div>
+		<div class="transportation-info">
+			<div class="transport-section">
+				<div class="transport-title">자가용 이용시</div>
+				<div class="transport-content">
+					<div>중부, 경부방면에서 오실 경우 오창IC 진입방법</div>
+					<div>오창IC에서 청주방면 → 오동교차로에서 좌회전 → 구성교차로에서 우회전</div>
+					<div>→ 200M 직진 후 좌회전 → 메리다 웨딩컨벤션</div>
+				</div>
+			</div>
 
-		<div class="transport-section">
-			<div class="transport-title">버스</div>
-			<div class="transport-content">
-				<div class="bus-item">- 메리다 컨벤션 정류장 하차</div>
-				<div class="bus-category">
-					<div class="category-title">일반 :</div>
-					<div class="bus-numbers">11번, 12번, 13번, 14번, 15번</div>
-				</div>
-				<div class="bus-category">
-					<div class="category-title">좌석 :</div>
-					<div class="bus-numbers">100번, 101번, 102번</div>
-				</div>
-				<div class="bus-category">
-					<div class="category-title">마을 :</div>
-					<div class="bus-numbers">청주-1번, 청주-2번</div>
+			<div class="transport-section">
+				<div class="transport-title">대중교통 이용시</div>
+				<div class="transport-content">
+					<div>청주가경터미널에서 출발시</div>
+					<div>도보 3분 → 시외버스정류장에서 승차 → 구성3리에서 하차</div>
+					<div>(105번, 105-1번 버스)</div>
+					<br />
+					<div>청주여객북부정류소에서 출발시</div>
+					<div>도보 4분 → 청주대학교 버스정류장에서 승차 → 구성3리에서 하차</div>
+					<div>(105번, 105-1번, 115-1번, 119번 버스)</div>
 				</div>
 			</div>
 		</div>
-
-		<div class="transport-section">
-			<div class="transport-title">자가용</div>
-			<div class="transport-content">청주시 흥덕구 가경동 1234-5 (무료 주차장 완비)</div>
-		</div>
-
-		<div class="transport-section">
-			<div class="transport-title">기타 교통정보</div>
-			<div class="transport-content">하객 주차 무료 (예약 시 주차권 제공)</div>
-		</div>
-	</div>
 </section>
 
 <style lang="scss">
@@ -202,9 +148,10 @@
 			position: relative;
 		}
 
-		.naver-map {
+		.google-embed {
 			width: 100%;
 			height: 100%;
+			display: block;
 		}
 
 		.map-placeholder {

@@ -7,23 +7,50 @@
 
 	// 계좌번호 데이터
 	const groomAccounts = [
-		{ bank: '농협', number: '3025800409611', name: '김민수' },
-		{ bank: '농협', number: '3521267783813', name: '김철수' },
-		{ bank: '농협', number: '81508652255741', name: '박영희' }
+		{ bank: '신한', number: '110-452-182427', name: '최믿음' }
 	];
 
 	const brideAccounts = [
-		{ bank: '신한', number: '110558769720', name: '이지은' },
-		{ bank: '우리', number: '69909095902101', name: '최미영' }
+		{ bank: '신한', number: '110-513-135185', name: '신동은' }
 	];
 
-	function copyToClipboard(text) {
-		navigator.clipboard.writeText(text).then(() => {
-			// 복사 성공 알림 (선택사항)
-			alert('계좌번호가 복사되었습니다!');
-		}).catch(err => {
-			console.error('복사 실패:', err);
-		});
+	function copyToClipboard(raw) {
+		const text = String(raw);
+		// 표준 API (지원 브라우저)
+		if (navigator.clipboard && typeof navigator.clipboard.writeText === 'function') {
+			navigator.clipboard.writeText(text).then(() => {
+				alert('계좌번호가 복사되었습니다!');
+			}).catch(fallbackCopy);
+			return;
+		}
+		// 폴백
+		fallbackCopy();
+
+		function fallbackCopy() {
+			try {
+				// iOS Safari 대응: input 사용 + setSelectionRange
+				const input = document.createElement('input');
+				input.type = 'text';
+				input.value = text;
+				input.readOnly = true;
+				input.style.position = 'fixed';
+				input.style.left = '-9999px';
+				input.style.opacity = '0';
+				document.body.appendChild(input);
+				input.focus();
+				input.select();
+				input.setSelectionRange(0, input.value.length);
+				const ok = document.execCommand('copy');
+				document.body.removeChild(input);
+				if (ok) {
+					alert('계좌번호가 복사되었습니다!');
+				} else {
+					throw new Error('execCommand copy failed');
+				}
+			} catch {
+				alert('복사에 실패했습니다. 길게 눌러 복사해 주세요.');
+			}
+		}
 	}
 
 	function toggleGroom() {
@@ -58,7 +85,7 @@
 							<div class="account-name">{account.name}</div>
 						</div>
 						<div class="account-actions">
-							<button class="copy-btn" on:click={() => copyToClipboard(account.number)}>
+							<button class="copy-btn" type="button" on:click={() => copyToClipboard(account.number)}>
 								<Copy size={16} />
 								<span>복사</span>
 							</button>
@@ -117,7 +144,7 @@
 	}
 
 	.account-section {
-		margin-bottom: 1em;
+		margin-bottom: 1.2em;
 
 		&:last-child {
 			margin-bottom: 0;

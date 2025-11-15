@@ -4,16 +4,19 @@
 	import { localeStore } from '../i18n.svelte';
 	import { onMount } from 'svelte';
 	import { _ } from 'svelte-i18n';
+	import Bgm from '../components/bgm.svelte';
 
 	let { children } = $props();
 
 	let localeLoaded = $derived(!localeStore.isLoading && localeStore.locale);
 	let title = $state('');
+	let isClient = $state(false);
 	onMount(() => {
 		document.body.classList.add('loaded');
 		if (localeLoaded) {
 			title = $_('meta.title');
 		}
+		isClient = true;
 	});
 </script>
 
@@ -37,6 +40,9 @@
 </svelte:head>
 
 {@render children()}
+{#if isClient}
+	<Bgm />
+{/if}
 
 <style lang="scss">
 </style>

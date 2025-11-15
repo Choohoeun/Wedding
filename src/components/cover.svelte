@@ -38,12 +38,12 @@
 
 	<div class="cover-title-container">
 		<div class="names-en-box">
-			<span class="names en-sacramento"> Belief & Dongeun</span>
+			<span class="names en-sacramento"> Trust & Dongeun</span>
 		</div>
 
 		<div class="event-date-and-place-box">
 			<span class="event-date-and-time {localeStore.locale}">{$_('cover.date')}</span>
-			<span class="event-place">청주 메리아 컨벤션</span>
+			<span class="event-place">청주 메리다 컨벤션</span>
 		</div>
 	</div>
 </section>
@@ -51,7 +51,7 @@
 <style lang="scss">
 	section.cover {
 		position: relative;
-		background-image: url('/src/lib/assets/P1.webp');
+		background-image: url('/src/lib/assets/photo/main.jpeg');
 		background-repeat: no-repeat;
 		background-position: center center;
 		background-size: cover;
@@ -74,7 +74,7 @@
 		left: 4em;
 
 		span.names {
-			color: #616161;
+			color: #ffffff;
 			display: block;
 			font-size: 1rem;
 			letter-spacing: 0.8em;

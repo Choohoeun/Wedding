@@ -16,21 +16,14 @@
 
 	<div class="letter-container">
 		<div class="letter-content {localeStore.locale}">
-			<p>새 계명을 너희에게 주노니 서로 사랑하라</p>
-			<p>내가 너희를 사랑한 것 같이</p>
-			<p>너희도 서로 사랑하라</p>
-			<p>하나님의 신실한 계획 아래</p>
-			<p>있는 그대로 사랑할 사람을 만나</p>
-			<p>믿음으로 한 가정을 이루고자 합니다.</p>
-			<p>저희가 하나되는 자리에 오셔서</p>
-			<p>따뜻한 마음으로 축복해주세요.</p>
+			<p>“이러므로 사람이 그 부모를 떠나 그 둘이 한몸이 될찌니라 이러한즉 이제 둘이 아니요 한몸이니(마가복음10:7-8)”</p>
 		</div>
 
 		<div class="divider"></div>
 
 		<div class="family-description kr">
-			<p>백현철 · 김동자 <span class="relationship">의 아들</span><span class="name-gap"></span>최믿음</p>
-			<p>홍수철 · 박순자 <span class="relationship">의 딸</span><span class="name-gap"></span>신동은</p>
+			<p>최철순 · 임흥순 <span class="relationship">의 아들</span><span class="name-gap"></span>최믿음</p>
+			<p>신포식 · 곽주연 <span class="relationship">의 딸</span><span class="name-gap"></span>신동은</p>
 		</div>
 	</div>
 </section>
@@ -44,7 +37,7 @@
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		margin-bottom: 2em;
+		margin-bottom: 4em;
 	}
 
 	.invitation-text {
@@ -104,9 +97,9 @@
 		
 		p {
 			color: $font-color-default;
-			margin-bottom: 0.5em;
+			margin-bottom: 0.2em;
 			font-size: 0.9rem;
-			line-height: 2.2;
+			line-height: 1.8;
 		}
 		
 		.relationship {
@@ -121,7 +114,8 @@
 
 	.letter-content {
 		text-align: center;
-		margin-bottom: 2em;
+		margin-top: 2em;
+		margin-bottom: 2.5em;
 		
 		p {
 			margin-bottom: 0.8em;

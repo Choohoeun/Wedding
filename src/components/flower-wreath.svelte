@@ -14,7 +14,7 @@
 	}
 
 	function openFlowerWreath() {
-		window.open('https://agent.maruw.co.kr/mobile/product-type01?goods_div_idx=1', '_blank');
+		window.open('https://f-mans.com/goods/catalog_list?code=0004', '_blank');
 	}
 </script>
 

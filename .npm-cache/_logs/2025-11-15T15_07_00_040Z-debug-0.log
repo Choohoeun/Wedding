@@ -1,0 +1,24 @@
+0 verbose cli /usr/local/bin/node /usr/local/lib/node_modules/npm/bin/npm-cli.js
+1 info using npm@10.9.2
+2 info using node@v22.14.0
+3 silly config load:file:/usr/local/lib/node_modules/npm/npmrc
+4 silly config load:file:/Users/choohoeun/Library/CloudStorage/OneDrive-gachon.ac.kr/WD/our-wedding-invitation/.npmrc
+5 silly config load:file:/Users/choohoeun/.npmrc
+6 silly config load:file:/usr/local/etc/npmrc
+7 verbose title npm exec surge --project build --domain wedding-invitation-2025.surge.sh
+8 verbose argv "exec" "--yes" "--" "surge" "--project" "build" "--domain" "wedding-invitation-2025.surge.sh"
+9 verbose logfile logs-max:10 dir:/Users/choohoeun/Library/CloudStorage/OneDrive-gachon.ac.kr/WD/our-wedding-invitation/.npm-cache/_logs/2025-11-15T15_07_00_040Z-
+10 verbose logfile /Users/choohoeun/Library/CloudStorage/OneDrive-gachon.ac.kr/WD/our-wedding-invitation/.npm-cache/_logs/2025-11-15T15_07_00_040Z-debug-0.log
+11 silly logfile start cleaning logs, removing 1 files
+12 silly logfile done cleaning log files
+13 silly packumentCache heap:4345298944 maxSize:1086324736 maxEntrySize:543162368
+14 verbose shrinkwrap failed to load node_modules/.package-lock.json out of date, updated: node_modules/@cloudflare
+15 http fetch GET 200 https://registry.npmjs.org/surge 103ms (cache revalidated)
+16 silly packumentCache heap:4345298944 maxSize:1086324736 maxEntrySize:543162368
+17 silly packumentCache heap:4345298944 maxSize:1086324736 maxEntrySize:543162368
+18 verbose cwd /Users/choohoeun/Library/CloudStorage/OneDrive-gachon.ac.kr/WD/our-wedding-invitation
+19 verbose os Darwin 24.6.0
+20 verbose node v22.14.0
+21 verbose npm  v10.9.2
+22 verbose exit 0
+23 info ok
